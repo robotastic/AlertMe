@@ -53,10 +53,17 @@ Titanium.API.info('Button Clicked');
 });
 
 var data = [{title:'Loading...'}];
+var info = [];
 var tableView = Titanium.UI.createTableView({
   top: 50,
   left: 0,
   data:data
+});
+
+
+tableView.addEventListener('click', function(ev){
+Titanium.API.info('Row clicked: ' + ev.index);
+    alertInfo(ev.index);
 });
 
 //var rowWebView = Titanium.UI.createWebView({

@@ -6,6 +6,7 @@ var currentLon = null;
 
 function wowIHateJSONP(r){
   data = [];
+  info = [];
   for(var i=0; i < r.alerts.length; i++){
     var al = r.alerts[i];
     if(categoryFilter == "All" || al.info[0].category[0] == categoryFilter){
@@ -18,10 +19,13 @@ function wowIHateJSONP(r){
       var lbl = Ti.UI.createLabel({text: al.info[0].headline, width: 310 - 45, height: 'auto', left: 45});
       viewBase.add(lbl);
       row.add(viewBase);
-
+        info.push({title: al.info[0].headline, summary: al.info[0].summary});
       data.push(row);
     } else {
+      
+      info.push({title: "Filtered", message: "no info"});
       data.push({title: 'not pushing '+al.info[0].category[0]+" due to categoryFilter "+ categoryFilter});
+      
     }
   }
   tableView.setData(data);
@@ -143,6 +147,13 @@ function sendPhoto()
         // TODO: need to upload the photo from file_location to flickr or picasa or facebook, looks like Titanium has Facebook support built in.
     }
 
+}
+
+function alertInfo(index)
+{
+    var a = Titanium.UI.createAlertDialog({title: info[index].title, message: info[index].message});
+    Titanium.API.info('title:' + info[index].title + " message: " +info[index].message);
+    a.show();
 }
 
 function getAlerts(tableView){
