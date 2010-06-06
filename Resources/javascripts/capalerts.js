@@ -19,7 +19,7 @@ function wowIHateJSONP(r){
       var lbl = Ti.UI.createLabel({text: al.info[0].headline, width: 310 - 45, height: 'auto', left: 45});
       viewBase.add(lbl);
       row.add(viewBase);
-        info.push({title: al.info[0].headline, summary: al.info[0].summary});
+        info.push({title: al.info[0].headline, message: al.info[0].description});
       data.push(row);
     } else {
       
@@ -151,8 +151,29 @@ function sendPhoto()
 
 function alertInfo(index)
 {
-    var a = Titanium.UI.createAlertDialog({title: info[index].title, message: info[index].message});
-    Titanium.API.info('title:' + info[index].title + " message: " +info[index].message);
+   
+   /*	var win = Titanium.UI.createWindow({
+		
+		backgroundColor:'#13386c',
+		barColor:'#336699',
+		translucent:true
+		
+	});
+	
+	var winview = Ti.UI.createView({backgroundColor:'grey'});
+	win.add(winview);*/
+    
+     var a = Titanium.UI.createAlertDialog({title: info[index].title, message: info[index].message});
+     a.buttonNames = ['OK','Capture Photo'];
+     a.addEventListener('click', function(e)
+{
+	
+    Titanium.API.info('title:' + info[index].title + " message: " +info[index].message + " Button clicked: " + e.index);
+    if (e.index == 1)
+    {
+        sendPhoto();
+    }
+});
     a.show();
 }
 

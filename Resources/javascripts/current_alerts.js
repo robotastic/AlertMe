@@ -38,19 +38,6 @@ Titanium.App.addEventListener("set_category_value", function(ev){
 });
 
 
-// TODO: Button needs to be placed better, probably should go in the popup that will show up when you click on a table row for a praticular CAP Alert
-var b1 = Titanium.UI.createButton({
-	title:'Confirm Event',
-	height:40,
-	width:win.width,
-    top: win.height - 40
-});
-
-b1.addEventListener('click', function(ev){
-Titanium.API.info('Button Clicked');
-    sendPhoto();
-  
-});
 
 var data = [{title:'Loading...'}];
 var info = [];
@@ -77,6 +64,6 @@ Titanium.API.info('Row clicked: ' + ev.index);
 //tableView.add(row);
 win.add(selectView);
 win.add(tableView);
-win.add(b1);
+
 
 getAlerts(tableView, categoryFilter);
